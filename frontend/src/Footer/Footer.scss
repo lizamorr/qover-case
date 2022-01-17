@@ -1,0 +1,17 @@
+.footer {
+  position: fixed;
+  height: 49px;
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  bottom: 0;
+  width: 100%;
+  max-width: 144rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__text {
+    font-size: 12px;
+    line-height: 1.42;
+    color: #fff;
+  }
+}
