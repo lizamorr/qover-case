@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import logo from "./qover-logo.svg";
 import checkCircled from "./check-circled.svg";
-import { Button } from "../Button";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
