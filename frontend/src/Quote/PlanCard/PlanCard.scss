@@ -1,0 +1,36 @@
+.plan-card {
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.5);
+  max-width: 323px;
+  min-width: 100px;
+  width: 100%;
+  &--blue {
+    background-color: #31cfda;
+    margin-right: 1rem;
+    color: #fff;
+  }
+  &--white {
+    background-color: #fff;
+    color: var(--greyish-brown);
+  }
+  &__header {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 1rem;
+  }
+  &__price {
+    border-top: solid 1px var(--blue-grey);
+    margin: 0;
+    padding: 1rem;
+  }
+  &__content {
+    padding: 1rem 0;
+  }
+  &__item {
+    font-size: 12px;
+    font-weight: 500;
+    border-bottom: solid 1px var(--blue-grey);
+    margin: 0;
+    padding: 1rem;
+  }
+}

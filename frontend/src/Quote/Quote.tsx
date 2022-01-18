@@ -1,60 +1,35 @@
 import React, { useState } from "react";
+import iconComparison from "./icon-comparison.svg";
+import { PlanCard } from "./PlanCard";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
 
 export const Quote = () => {
-  //const [age, setAge] = useState(0);
-  const [selectedCar, setSelectedCar] = useState("");
-  //const [cars, setCars] = useState([]);
-  const [price, setPrice] = useState(0);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const calculatePrice = async (event: React.FormEvent<HTMLFormElement>) => {
+  const authenticateLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
   return (
     <div className="quote">
       <div className="quote__container">
-        <div className="quote__card">
-          <form className="quote__card-form" onSubmit={calculatePrice}>
-            <div className="quote__card-row">
-              <span className="quote__card-label">Age of the driver</span>
-              <div className="quote__card-input">
-                <input
-                  type="number"
-                  className="input"
-                  //value={age}
-                  //onChange={(event) => setAge(event.target.value)}
-                  required
-                />
-              </div>
-            </div>
-            <div className="quote__card-row">
-              <span className="quote__card-label">Car</span>
-              <div className="quote__card-input">
-                <select
-                  className="select"
-                  name="selectedCar"
-                  value={selectedCar}
-                  onChange={(event) => setSelectedCar(event.target.value)}
-                  required
-                />
-              </div>
-            </div>
-            <div className="quote__card-row">
-              <span className="quote__card-label">Purchase Price</span>
-              <div className="quote__card-input">
-                <input
-                  type="number"
-                  className="input"
-                  value={price}
-                  //onChange={(event) => setPrice(event.target.value)}
-                  required
-                />
-              </div>
-            </div>
-            <button className="price-button" type="submit">
-              Get a price
-            </button>
-          </form>
+        <header className="quote__header">Select a plan</header>
+        <div className="quote__toggle">
+          <span className="quote__toggle-label">PAY MONTHLY</span>
+          <div className="quote__toggle-icon">
+            <Toggle className="toggle" icons={{ checked: "", unchecked: "" }} />
+          </div>
+          <span className="quote__toggle-label">PAY YEARLY</span>
+        </div>
+        <div className="quote__card-container">
+          <PlanCard isGlobal={true} />
+          <PlanCard isGlobal={false} />
+        </div>
+        <div className="quote__comparison">
+          <a>Show me the full comparison table</a>
+          <img src={iconComparison} />
         </div>
       </div>
     </div>

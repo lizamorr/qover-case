@@ -4,6 +4,7 @@ import "./index.scss";
 // import { Login } from "./Login";
 // import { Header } from "./Header";
 // import { Footer } from "./Footer";
+// import { Car } from "./Car";
 import { Quote } from "./Quote";
 
 ReactDOM.render(
@@ -11,7 +12,8 @@ ReactDOM.render(
     {/* <Header />
     <Login />
     <Footer /> */}
-    <Quote />
+    {/* <Car /> */}
+    {<Quote />}
   </React.StrictMode>,
   document.getElementById("root")
 );

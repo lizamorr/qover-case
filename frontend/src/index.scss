@@ -2,10 +2,11 @@
 @import "./Login/Login.scss";
 @import "./Button/Button.scss";
 @import "./Footer/Footer.scss";
+@import "./Car/Car.scss";
 @import "./Quote/Quote.scss";
+@import "./Quote/PlanCard/PlanCard.scss";
 
 body {
-  background: linear-gradient(122deg, #317bda -6%, #33c3c8);
   height: 100vh;
   margin: 0 auto;
   font-family: Roboto;
@@ -17,4 +18,5 @@ body {
 :root {
   --blue-grey: #5b7289;
   --greyish-brown: #484848;
+  --greyish-brown-5: rgba(72, 72, 72, 0.05);
 }
