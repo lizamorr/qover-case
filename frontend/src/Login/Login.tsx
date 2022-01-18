@@ -3,7 +3,7 @@ import logo from "./qover-logo.svg";
 import checkCircled from "./check-circled.svg";
 import { Button } from "../Button";
 
-export const Login: React.FC = () => {
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -49,9 +49,14 @@ export const Login: React.FC = () => {
               </div>
               <a className="forgot__text">Forgot your password?</a>
             </div>
-            <Button text="Sign in to your account" />
+            <button type="submit" className="submit-button">
+              Sign in to your account
+            </button>
           </form>
         </div>
+        <button type="button" className="access-button">
+          Don't have an account? <span className="access-link">Ask access</span>
+        </button>
       </div>
     </div>
   );

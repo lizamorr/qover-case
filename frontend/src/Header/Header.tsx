@@ -1,7 +1,7 @@
 import React from "react";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 
-export const Header: React.FC = () => (
+export const Header = () => (
   <header className="header">
     <div className="header__content">
       <ArrowBackIosNewRoundedIcon style={{ color: "white", width: "7px" }} />
