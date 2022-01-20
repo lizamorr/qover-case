@@ -1,3 +1,7 @@
+$blue-grey: #5b7289;
+$greyish-brown: #484848;
+$light-blue: #31cfda;
+
 .plan-card {
   border-radius: 3px;
   box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.5);
@@ -11,26 +15,81 @@
   }
   &--white {
     background-color: #fff;
-    color: var(--greyish-brown);
+    color: $greyish-brown;
   }
   &__header {
     font-size: 18px;
     font-weight: bold;
-    padding-bottom: 1rem;
-  }
-  &__price {
-    border-top: solid 1px var(--blue-grey);
-    margin: 0;
     padding: 1rem;
   }
+  &__price-container--blue,
+  &__price-container--white {
+    margin: 0;
+    padding: 1rem;
+    font-size: 38px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    .euro {
+      vertical-align: text-top;
+      font-size: 16px;
+      padding: 5px 0 0 6px;
+    }
+  }
+  &__price-container--blue {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+  &__price-container--white {
+    background-color: #f5fdfe;
+    color: $light-blue;
+  }
+  &__price {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  &__price-tax {
+    font-size: 11px;
+    font-weight: normal;
+  }
   &__content {
-    padding: 1rem 0;
+    padding: 0;
+    hr {
+      border: solid 1px $blue-grey;
+      opacity: 0.1;
+      margin: 0;
+    }
   }
   &__item {
     font-size: 12px;
     font-weight: 500;
-    border-bottom: solid 1px var(--blue-grey);
     margin: 0;
     padding: 1rem;
+  }
+  &__button-container {
+    padding: 1rem;
+  }
+  &__button {
+    border-radius: 5px;
+    max-width: 303px;
+    height: 50px;
+    width: 100%;
+    font-family: museo-sans, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    &--blue {
+      color: #fff;
+      background-color: #31cfda;
+    }
+    &--white {
+      color: #31cfda;
+      background-color: #fff;
+    }
+    .valid-check {
+      padding-right: 8px;
+    }
   }
 }

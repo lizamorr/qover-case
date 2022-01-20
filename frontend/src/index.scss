@@ -1,10 +1,10 @@
-@import "./Header/Header.scss";
-@import "./Login/Login.scss";
-@import "./Button/Button.scss";
-@import "./Footer/Footer.scss";
-@import "./Car/Car.scss";
-@import "./Quote/Quote.scss";
-@import "./Quote/PlanCard/PlanCard.scss";
+@use "./Header/Header.scss";
+@use "./Login/Login.scss";
+@use "./Button/Button.scss";
+@use "./Footer/Footer.scss";
+@use "./Car/Car.scss";
+@use "./Quote/Quote.scss";
+@use "./Quote/PlanCard/PlanCard.scss";
 
 body {
   height: 100vh;
@@ -14,9 +14,4 @@ body {
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
-}
-:root {
-  --blue-grey: #5b7289;
-  --greyish-brown: #484848;
-  --greyish-brown-5: rgba(72, 72, 72, 0.05);
 }

@@ -8,6 +8,8 @@ export const Quote = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [selectedPlan, setSelectedPlan] = useState("global");
+
   const authenticateLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
@@ -24,12 +26,20 @@ export const Quote = () => {
           <span className="quote__toggle-label">PAY YEARLY</span>
         </div>
         <div className="quote__card-container">
-          <PlanCard isGlobal={true} />
-          <PlanCard isGlobal={false} />
+          <PlanCard
+            plan="global"
+            isSelected={selectedPlan === "global"}
+            onSelectedPlan={setSelectedPlan}
+          />
+          <PlanCard
+            plan="universe"
+            isSelected={selectedPlan === "universe"}
+            onSelectedPlan={setSelectedPlan}
+          />
         </div>
         <div className="quote__comparison">
           <a>Show me the full comparison table</a>
-          <img src={iconComparison} />
+          <img src={iconComparison} alt="Comparison icon" />
         </div>
       </div>
     </div>
