@@ -3,15 +3,19 @@ import iconComparison from "./icon-comparison.svg";
 import { PlanCard } from "./PlanCard";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
+import { GLOBAL_PLAN, UNIVERSAL_PLAN } from "./constants";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 export const Quote = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const [selectedPlan, setSelectedPlan] = useState("global");
+  const [isYearly, setIsYearly] = useState(true);
+  const quote = useSelector((state: RootStateOrAny) => state.quote);
 
-  const authenticateLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleToggleChange = async (
+    event: React.FormEvent<HTMLInputElement>
+  ) => {
     event.preventDefault();
+    setIsYearly(!isYearly);
   };
 
   return (
@@ -21,20 +25,29 @@ export const Quote = () => {
         <div className="quote__toggle">
           <span className="quote__toggle-label">PAY MONTHLY</span>
           <div className="quote__toggle-icon">
-            <Toggle className="toggle" icons={{ checked: "", unchecked: "" }} />
+            <Toggle
+              checked={isYearly}
+              onChange={(e) => handleToggleChange(e)}
+              className="toggle"
+              icons={{ checked: "", unchecked: "" }}
+            />
           </div>
           <span className="quote__toggle-label">PAY YEARLY</span>
         </div>
         <div className="quote__card-container">
           <PlanCard
-            plan="global"
-            isSelected={selectedPlan === "global"}
+            quote={quote.global}
+            type={GLOBAL_PLAN}
+            isSelected={selectedPlan === GLOBAL_PLAN}
             onSelectedPlan={setSelectedPlan}
+            isYearly={isYearly}
           />
           <PlanCard
-            plan="universe"
-            isSelected={selectedPlan === "universe"}
+            quote={quote.universal}
+            type={UNIVERSAL_PLAN}
+            isSelected={selectedPlan === UNIVERSAL_PLAN}
             onSelectedPlan={setSelectedPlan}
+            isYearly={isYearly}
           />
         </div>
         <div className="quote__comparison">

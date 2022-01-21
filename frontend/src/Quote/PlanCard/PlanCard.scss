@@ -63,9 +63,12 @@ $light-blue: #31cfda;
   }
   &__item {
     font-size: 12px;
-    font-weight: 500;
+    font-weight: bolder;
     margin: 0;
     padding: 1rem;
+    &--light {
+      font-weight: 100;
+    }
   }
   &__button-container {
     padding: 1rem;
@@ -87,6 +90,12 @@ $light-blue: #31cfda;
     &--white {
       color: #31cfda;
       background-color: #fff;
+    }
+    &-content {
+      display: flex;
+      justify-content: center;
+      vertical-align: center;
+      align-items: center;
     }
     .valid-check {
       padding-right: 8px;
