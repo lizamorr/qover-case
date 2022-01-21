@@ -95,14 +95,17 @@ export const Car = () => {
             <div className="car__card-row">
               <span className="car__card-label">Purchase Price</span>
               <div className="car__card-input">
-                <input
-                  name="price"
-                  type="number"
-                  className="input"
-                  value={price}
-                  onChange={handlePriceChange}
-                  required
-                />
+                <div className="car__card-price">
+                  <input
+                    name="price"
+                    type="number"
+                    className="input"
+                    value={price}
+                    onChange={handlePriceChange}
+                    required
+                  />
+                  <span className="euro">&euro;</span>
+                </div>
               </div>
             </div>
             <button className="price-button" type="submit">

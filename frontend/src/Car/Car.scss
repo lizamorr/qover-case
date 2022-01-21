@@ -54,6 +54,16 @@ $light-blue: #31cfda;
       flex: 1.7;
       justify-content: center;
     }
+    &-price {
+      display: flex;
+      flex-direction: row;
+      .input {
+        margin-right: 1rem;
+      }
+      .euro {
+        align-self: center;
+      }
+    }
   }
   .input,
   .select {
