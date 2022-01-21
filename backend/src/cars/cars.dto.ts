@@ -1,3 +1,3 @@
 export class CarDTO {
-  model: string;
+  readonly model: string;
 }
