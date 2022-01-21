@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ICarModel, IOption } from "./types";
 
 export const Car = () => {
@@ -18,11 +18,12 @@ export const Car = () => {
 
   useEffect(() => {
     const getCarModels = async (): Promise<void> => {
+      axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
       axios
-        .get(`${process.env.NESTJS_BASE_URL}/cars'`)
+        .get("/cars")
         .then((res) =>
           setCarModels(
-            res.data.cars.map((car: ICarModel) => ({
+            res.data.map((car: ICarModel) => ({
               label: car.model,
               value: car.id,
             }))
@@ -82,7 +83,7 @@ export const Car = () => {
                   onChange={handleCarSelectionChange}
                   required
                 >
-                  <option value=""></option>
+                  <option hidden disabled value=""></option>
                   {carModels.map((car) => (
                     <option key={car.value} value={car.value}>
                       {car.label}

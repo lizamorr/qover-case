@@ -5,6 +5,7 @@
 @use "./Car/Car.scss";
 @use "./Quote/Quote.scss";
 @use "./Quote/PlanCard/PlanCard.scss";
+@use "./Background/Background.scss";
 
 body {
   height: 100vh;
@@ -15,7 +16,6 @@ body {
   font-style: normal;
   letter-spacing: normal;
   #root {
-    background: linear-gradient(122deg, #317bda -6%, #33c3c8);
     height: 100vh;
   }
 }
