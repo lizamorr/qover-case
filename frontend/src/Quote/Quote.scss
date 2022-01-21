@@ -1,5 +1,8 @@
 $greyish-brown-5: rgba(72, 72, 72, 0.05);
 
+#root {
+  background: none !important;
+}
 .quote {
   height: 100vh;
   max-width: 120rem;

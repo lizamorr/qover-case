@@ -17,9 +17,9 @@ export const Car = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getCarModels(): Promise<void> {
+    const getCarModels = async (): Promise<void> => {
       axios
-        .get("/cars")
+        .get(`${process.env.NESTJS_BASE_URL}/cars'`)
         .then((res) =>
           setCarModels(
             res.data.cars.map((car: ICarModel) => ({
@@ -29,9 +29,9 @@ export const Car = () => {
           )
         )
         .catch(() => alert("Error receiving cars"));
-    }
-    getCarModels(), [];
-  });
+    };
+    getCarModels();
+  }, []);
 
   const handleAgeChange = (e: any) => {
     setAge(e.target.value);
