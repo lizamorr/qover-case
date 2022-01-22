@@ -16,9 +16,8 @@ export const Car = () => {
 
   useEffect(() => {
     const getCars = async (): Promise<void> => {
-      axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
       axios
-        .get("/cars")
+        .get("/cars", { baseURL: process.env.REACT_APP_NESTJS_BASE_URL })
         .then((res) =>
           setCars(
             res.data.map((car: ICarModel) => ({
@@ -47,9 +46,11 @@ export const Car = () => {
   ): Promise<void> => {
     event.preventDefault();
 
-    axios.defaults.baseURL = `${process.env.REACT_APP_NESTJS_BASE_URL}`;
+    axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
     axios
-      .post("/quote/getQuote", { params: { selectedCarId, age, price } })
+      .post("/quote/getQuote", {
+        params: { selectedCarId, age, price },
+      })
       .then((quoteRes) => {
         dispatch(quote(quoteRes.data.yearlyPrice));
         navigate("/quote");

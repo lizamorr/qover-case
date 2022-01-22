@@ -1,13 +1,28 @@
 import React, { useState } from "react";
 import logo from "./qover-logo.svg";
 import checkCircled from "./check-circled.svg";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const authenticateLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
+    axios
+      .post("/login", {
+        params: { email, password },
+      })
+      .then((res) => {
+        if (res.data) {
+          navigate("/cars");
+        }
+      })
+      .catch((error) => {
+        alert("Error logging in");
+      });
   };
 
   return (
