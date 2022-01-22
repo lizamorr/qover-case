@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Car } from './cars.interface';
 import { CarsService } from './cars.service';
-import { ValidateObjectId } from './validate-object-id.pipes';
+import { ValidateObjectId } from '../shared/validate-object-id.pipes';
 
 @Controller('cars')
 export class CarsController {
@@ -17,6 +17,9 @@ export class CarsController {
   @Get()
   async getCars(@Res() res): Promise<Car[]> {
     const cars = await this.carsService.getCars();
+    if (!cars || cars.length === 0) {
+      throw new NotFoundException('Cars do not exist');
+    }
     return res.status(HttpStatus.OK).json(cars);
   }
 

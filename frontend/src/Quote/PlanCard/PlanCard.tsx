@@ -2,18 +2,15 @@ import React from "react";
 import validCheckBlue from "./valid-check-blue.svg";
 import validCheckWhite from "./valid-check-white.svg";
 import classNames from "classnames";
-import { FormattedNumber, IntlProvider } from "react-intl";
 import { GLOBAL_PLAN, MONTHS_IN_YEAR, UNIVERSAL_PLAN } from "../constants";
 import { PlanType } from "../types";
 
 interface IPlanCardProps {
-  quote: number;
   isYearly: boolean;
   isSelected: boolean;
   type: PlanType;
   onSelectedPlan: (plan: string) => void;
-  yearlyPrice?: number;
-  monthlyPrice?: number;
+  price: number;
 }
 
 const plans = {
@@ -36,16 +33,25 @@ const plans = {
 };
 
 export const PlanCard = ({
-  quote = 0,
   isSelected = false,
   onSelectedPlan,
   type = GLOBAL_PLAN,
   isYearly,
-  yearlyPrice = 0,
-  monthlyPrice = 0,
+  price = 0,
 }: IPlanCardProps) => {
   const handlePlanSelection = () => {
     onSelectedPlan(type);
+  };
+
+  const formatCurrency = (price: number, isYearly: boolean) => {
+    let finalPrice = !isYearly ? price / MONTHS_IN_YEAR : price;
+    return new Intl.NumberFormat("nl-BE", {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 2,
+    })
+      .format(finalPrice)
+      .substring(1);
   };
 
   return (
@@ -64,12 +70,7 @@ export const PlanCard = ({
           }`}
         >
           <div className="plan-card__price">
-            <IntlProvider locale="be">
-              <FormattedNumber
-                style="currency"
-                value={isYearly ? quote : quote / MONTHS_IN_YEAR}
-              />
-            </IntlProvider>
+            {formatCurrency(price, isYearly)}
 
             <div className="euro">&euro;</div>
           </div>

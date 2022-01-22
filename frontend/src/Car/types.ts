@@ -1,5 +1,5 @@
 export interface ICarModel {
-  id: string;
+  _id: string;
   model: string;
 }
 

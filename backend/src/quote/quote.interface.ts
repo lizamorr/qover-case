@@ -1,15 +1,15 @@
-export interface IQuoteResponse {
+export interface QuoteResponse {
   yearlyPrice: {
     universal: number;
     global: number;
   };
 }
 
-export interface GetQuote {
+export interface QuoteRequest {
   params: {
-    carId: string;
+    selectedCarId: string;
     age: number;
-    purchasePrice: number;
+    price: number;
   };
 }
 

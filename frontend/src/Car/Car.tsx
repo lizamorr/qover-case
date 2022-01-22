@@ -1,54 +1,60 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { FormEvent, useEffect, useState } from "react";
+import { quote } from "../store/quoteSlice";
+import { useNavigate } from "react-router-dom";
 import { ICarModel, IOption } from "./types";
+import { useDispatch } from "react-redux";
 
 export const Car = () => {
   const [age, setAge] = useState(0);
-  const [selectedCar, setSelectedCar] = useState("");
-  const [carModels, setCarModels] = useState<IOption[]>([]);
+  const [selectedCarId, setSelectedCarId] = useState("");
+  const [cars, setCars] = useState<IOption[]>([]);
   const [price, setPrice] = useState(0);
 
-  const [monthlyGlobalPrice, setMonthlyGlobalPrice] = useState(0);
-  const [monthlyUniversePrice, setMonthlyUniversePrice] = useState(0);
-  const [yearlyGlobalPrice, setYearlyGlobalPrice] = useState(0);
-  const [yearlyUniversePrice, setYearlyUniversePrice] = useState(0);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const getCarModels = async (): Promise<void> => {
+    const getCars = async (): Promise<void> => {
       axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
       axios
         .get("/cars")
         .then((res) =>
-          setCarModels(
+          setCars(
             res.data.map((car: ICarModel) => ({
               label: car.model,
-              value: car.id,
+              value: car._id,
             }))
           )
         )
         .catch(() => alert("Error receiving cars"));
     };
-    getCarModels();
+    getCars();
   }, []);
 
   const handleAgeChange = (e: any) => {
     setAge(e.target.value);
   };
   const handleCarSelectionChange = (e: any) => {
-    setSelectedCar(e.target.value);
+    setSelectedCarId(e.target.value);
   };
   const handlePriceChange = (e: any) => {
     setPrice(e.target.value);
   };
 
-  const handleFormSubmit = async () => {
+  const handleFormSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    event.preventDefault();
+
+    axios.defaults.baseURL = `${process.env.REACT_APP_NESTJS_BASE_URL}`;
     axios
-      .post("/quote", { params: { selectedCar, age, price } })
-      .then((res) => dispatch(res.data))
-      .catch(() => {});
+      .post("/quote/getQuote", { params: { selectedCarId, age, price } })
+      .then((quoteRes) => {
+        dispatch(quote(quoteRes.data.yearlyPrice));
+        navigate("/quote");
+      })
+      .catch((error) => alert("Cannot get a quote. Please try again."));
   };
 
   return (
@@ -79,12 +85,12 @@ export const Car = () => {
                 <select
                   className="select"
                   name="selectedCar"
-                  value={selectedCar}
+                  value={selectedCarId}
                   onChange={handleCarSelectionChange}
                   required
                 >
                   <option hidden disabled value=""></option>
-                  {carModels.map((car) => (
+                  {cars.map((car) => (
                     <option key={car.value} value={car.value}>
                       {car.label}
                     </option>

@@ -9,7 +9,6 @@ export class CarsService {
 
   async getCars(): Promise<Car[]> {
     const cars = await this.carsModel.find().exec();
-    console.log(cars);
     return cars;
   }
 
