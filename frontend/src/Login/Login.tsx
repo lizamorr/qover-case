@@ -7,6 +7,7 @@ import axios from "axios";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const authenticateLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,6 +20,9 @@ export const Login = () => {
         if (res.data) {
           navigate("/cars");
         }
+        setError(!error);
+        setEmail("");
+        setPassword("");
       })
       .catch((error) => {
         alert("Error logging in");
@@ -31,7 +35,10 @@ export const Login = () => {
         <img src={logo} alt="Qover logo" />
         <div className="login__card">
           <p className="login__card-title">Welcome at Qover</p>
-          <form onSubmit={authenticateLogin}>
+          {error && (
+            <p className="login__card-error">Invalid username or password</p>
+          )}
+          <form id="loginForm" onSubmit={authenticateLogin}>
             <div className="login__card-input">
               <div className="login__card-label">Email</div>
               <input
