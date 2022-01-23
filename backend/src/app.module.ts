@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { CarsModule } from './cars/cars.module';
 import { QuoteModule } from './quote/quote.module';
-import { LoginModule } from './login/login.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { LoginModule } from './login/login.module';
     ),
     CarsModule,
     QuoteModule,
-    LoginModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

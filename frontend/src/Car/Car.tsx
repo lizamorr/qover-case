@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React, { FormEvent, useEffect, useState } from "react";
 import { quote } from "../store/quoteSlice";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,12 @@ export const Car = () => {
   useEffect(() => {
     const getCars = async (): Promise<void> => {
       axios
-        .get("/cars", { baseURL: process.env.REACT_APP_NESTJS_BASE_URL })
+        .get("/cars", {
+          baseURL: process.env.REACT_APP_NESTJS_BASE_URL,
+          headers: {
+            Authorization: "bearer " + localStorage.getItem("jwt") || "",
+          },
+        })
         .then((res) =>
           setCars(
             res.data.map((car: ICarModel) => ({
@@ -26,7 +31,14 @@ export const Car = () => {
             }))
           )
         )
-        .catch(() => alert("Error receiving cars"));
+        .catch((error: AxiosError) => {
+          if (error.response?.status === 401) {
+            alert("Unauthorized user");
+            navigate("/");
+          } else {
+            alert("Error receiving cars. Please try again.");
+          }
+        });
     };
     getCars();
   }, []);
@@ -48,14 +60,27 @@ export const Car = () => {
 
     axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
     axios
-      .post("/quote/getQuote", {
-        params: { selectedCarId, age, price },
-      })
+      .post(
+        "/quote/getQuote",
+        { selectedCarId, age, price },
+        {
+          headers: {
+            Authorization: "bearer " + localStorage.getItem("jwt") || "",
+          },
+        }
+      )
       .then((quoteRes) => {
         dispatch(quote(quoteRes.data.yearlyPrice));
         navigate("/quote");
       })
-      .catch((error) => alert("Cannot get a quote. Please try again."));
+      .catch((error: AxiosError) => {
+        if (error.response?.status === 401) {
+          alert("Unauthorized user");
+          navigate("/");
+        } else {
+          alert("Cannot get a quote. Please try again.");
+        }
+      });
   };
 
   return (

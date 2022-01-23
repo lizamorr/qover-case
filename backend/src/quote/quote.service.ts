@@ -7,7 +7,7 @@ export class QuoteService {
   constructor(private carsService: CarsService) {}
 
   async getQuote(quoteRequest: QuoteRequest): Promise<QuoteResponse> {
-    const { selectedCarId, age, price } = quoteRequest.params;
+    const { selectedCarId, age, price } = quoteRequest;
     const quoteErrors: InvalidQuote[] = [];
     const priceError: string = 'Sorry! The price of the car is too low';
     const riskError: string = 'Sorry! We can not accept this particular risk';

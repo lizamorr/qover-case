@@ -6,11 +6,9 @@ export interface QuoteResponse {
 }
 
 export interface QuoteRequest {
-  params: {
-    selectedCarId: string;
-    age: number;
-    price: number;
-  };
+  selectedCarId: string;
+  age: number;
+  price: number;
 }
 
 export interface InvalidQuote {

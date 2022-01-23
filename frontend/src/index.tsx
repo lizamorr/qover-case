@@ -28,6 +28,16 @@ ReactDOM.render(
           />
           <Route path={"/cars"} element={<Car />} />
           <Route path={"/quote"} element={<Quote />} />
+          <Route
+            path="*"
+            element={[
+              <Background>
+                <Header />
+                <Login />
+                <Footer />
+              </Background>,
+            ]}
+          />
         </Routes>
       </BrowserRouter>
     </Provider>

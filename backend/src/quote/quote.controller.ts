@@ -6,7 +6,9 @@ import {
   HttpStatus,
   NotFoundException,
   Body,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { QuoteRequest, QuoteResponse } from './quote.interface';
 import { QuoteService } from './quote.service';
 
@@ -14,6 +16,7 @@ import { QuoteService } from './quote.service';
 export class QuoteController {
   constructor(private readonly quoteService: QuoteService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('/getQuote')
   async getQuote(
     @Res() res,

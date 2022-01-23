@@ -13,19 +13,22 @@ export const Login = () => {
     event.preventDefault();
     axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
     axios
-      .post("/login", {
-        params: { email, password },
+      .post("/auth/login", {
+        email,
+        password,
       })
       .then((res) => {
         if (res.data) {
+          localStorage.setItem("jwt", res.data.access_token);
           navigate("/cars");
         }
-        setError(!error);
-        setEmail("");
-        setPassword("");
       })
       .catch((error) => {
-        alert("Error logging in");
+        error.response.status === 401
+          ? setError(true)
+          : alert("Error logging in");
+        setEmail("");
+        setPassword("");
       });
   };
 
