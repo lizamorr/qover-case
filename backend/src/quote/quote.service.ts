@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { QuoteRequest, QuoteResponse, InvalidQuote } from './quote.interface';
 import { CarsService } from '../cars/cars.service';
+import { MIN_AGE_ERROR, PRICE_ERROR, RISK_ERROR } from './constants';
 
 @Injectable()
 export class QuoteService {
@@ -9,30 +10,25 @@ export class QuoteService {
   async getQuote(quoteRequest: QuoteRequest): Promise<QuoteResponse> {
     const { selectedCarId, age, price } = quoteRequest;
     const quoteErrors: InvalidQuote[] = [];
-    const priceError: string = 'Sorry! The price of the car is too low';
-    const riskError: string = 'Sorry! We can not accept this particular risk';
-    const minAgeError: string = 'Sorry! The driver is too young';
-
-    if (price < 5000) {
-      quoteErrors.push({
-        key: 'price',
-        message: priceError,
-      });
-    }
-
-    if (age < 18) {
-      quoteErrors.push({
-        key: 'minAge',
-        message: minAgeError,
-      });
-    }
 
     const car = await this.carsService.getCar(selectedCarId);
-    if (car && car.minAge > age) {
+    if (price < car.minPrice) {
       quoteErrors.push({
-        key: 'risk',
-        message: riskError,
+        key: 'price',
+        message: PRICE_ERROR,
       });
+    }
+
+    if (age < car.minAge) {
+      car.model === 'Porsche'
+        ? quoteErrors.push({
+            key: 'risk',
+            message: RISK_ERROR,
+          })
+        : quoteErrors.push({
+            key: 'minAge',
+            message: MIN_AGE_ERROR,
+          });
     }
 
     if (quoteErrors.length > 0) {
@@ -46,6 +42,7 @@ export class QuoteService {
     } else {
       const universalYearlyPrice =
         car.insurancePrice + car.universalPercentageOfValue * price;
+
       return Promise.resolve({
         yearlyPrice: {
           universal: universalYearlyPrice,

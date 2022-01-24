@@ -20,3 +20,8 @@ export interface ISelect {
 export interface ISelectInput {
   error?: string;
 }
+
+export interface InvalidQuoteError {
+  key: string;
+  message: string;
+}

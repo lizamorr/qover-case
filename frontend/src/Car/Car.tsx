@@ -2,14 +2,16 @@ import axios, { AxiosError } from "axios";
 import React, { FormEvent, useEffect, useState } from "react";
 import { quote } from "../store/quoteSlice";
 import { useNavigate } from "react-router-dom";
-import { ICarModel, IOption } from "./types";
+import { ICarModel, InvalidQuoteError, IOption } from "./types";
 import { useDispatch } from "react-redux";
+import classNames from "classnames";
 
 export const Car = () => {
   const [age, setAge] = useState(0);
   const [selectedCarId, setSelectedCarId] = useState("");
   const [cars, setCars] = useState<IOption[]>([]);
   const [price, setPrice] = useState(0);
+  const [errors, setErrors] = useState<InvalidQuoteError[]>([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ export const Car = () => {
             res.data.map((car: ICarModel) => ({
               label: car.model,
               value: car._id,
+              key: car._id,
             }))
           )
         )
@@ -43,13 +46,13 @@ export const Car = () => {
     getCars();
   }, []);
 
-  const handleAgeChange = (e: any) => {
+  const handleAgeChange = (e: any): void => {
     setAge(e.target.value);
   };
-  const handleCarSelectionChange = (e: any) => {
+  const handleCarSelectionChange = (e: any): void => {
     setSelectedCarId(e.target.value);
   };
-  const handlePriceChange = (e: any) => {
+  const handlePriceChange = (e: any): void => {
     setPrice(e.target.value);
   };
 
@@ -73,14 +76,28 @@ export const Car = () => {
         dispatch(quote(quoteRes.data.yearlyPrice));
         navigate("/quote");
       })
-      .catch((error: AxiosError) => {
+      .catch((error) => {
         if (error.response?.status === 401) {
           alert("Unauthorized user");
           navigate("/");
         } else {
-          alert("Cannot get a quote. Please try again.");
+          setErrors(error.response?.data?.error);
         }
       });
+  };
+
+  const getError = (key: string): string => {
+    const error = errors?.find((error) => error.key === key);
+    return error ? error.message : "";
+  };
+
+  const removeValidationErrors = (key1: string, key2?: string): void => {
+    if (errors.length > 0) {
+      const updatedErrors = errors.filter(
+        (error) => error.key !== key1 && error.key !== key2
+      );
+      setErrors(updatedErrors);
+    }
   };
 
   return (
@@ -97,12 +114,25 @@ export const Car = () => {
               <div className="car__card-input">
                 <input
                   name="age"
-                  type="number"
-                  className="input"
-                  value={age}
+                  type="text"
+                  className={classNames(
+                    "input",
+                    `${
+                      getError("minAge") || getError("risk")
+                        ? "input--invalid"
+                        : ""
+                    }`
+                  )}
                   onChange={handleAgeChange}
                   required
+                  onFocus={() => removeValidationErrors("minAge", "risk")}
                 />
+                {getError("risk") && (
+                  <div className="error">{getError("risk")}</div>
+                )}
+                {getError("minAge") && (
+                  <div className="error">{getError("minAge")}</div>
+                )}
               </div>
             </div>
             <div className="car__card-row">
@@ -130,14 +160,35 @@ export const Car = () => {
                 <div className="car__card-price">
                   <input
                     name="price"
-                    type="number"
-                    className="input"
-                    value={price}
+                    type="text"
+                    className={classNames(
+                      "input",
+                      `${
+                        getError("price") || getError("price")
+                          ? "input--invalid"
+                          : ""
+                      }`
+                    )}
                     onChange={handlePriceChange}
+                    onFocus={() => removeValidationErrors("price")}
                     required
                   />
-                  <span className="euro">&euro;</span>
+                  <span
+                    className={classNames(
+                      "euro",
+                      `${
+                        getError("price") || getError("price")
+                          ? "euro--red"
+                          : ""
+                      }`
+                    )}
+                  >
+                    &euro;
+                  </span>
                 </div>
+                {getError("price") && (
+                  <div className="error">{getError("price")}</div>
+                )}
               </div>
             </div>
             <button className="price-button" type="submit">

@@ -5,4 +5,5 @@ export const CarsSchema = new mongoose.Schema({
   insurancePrice: Number,
   universalPercentageOfValue: Number,
   minAge: { value: Number, required: false },
+  minPrice: { value: Number, required: false },
 });

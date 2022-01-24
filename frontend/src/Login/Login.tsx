@@ -71,7 +71,9 @@ export const Login = () => {
                 />
                 <span className="remember__text">Remember me</span>
               </div>
-              <a className="forgot__text">Forgot your password?</a>
+              <a href="" className="forgot__text">
+                Forgot your password?
+              </a>
             </div>
             <button type="submit" className="submit-button">
               Sign in to your account

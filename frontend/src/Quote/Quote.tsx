@@ -6,6 +6,7 @@ import "react-toggle/style.css";
 import { GLOBAL_PLAN, UNIVERSAL_PLAN } from "./constants";
 import { QuoteState } from "../store/quoteSlice";
 import { RootStateOrAny, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const Quote = () => {
   const [selectedPlan, setSelectedPlan] = useState("global");
@@ -13,10 +14,25 @@ export const Quote = () => {
   const globalPrices: QuoteState = useSelector(
     (state: RootStateOrAny) => state.quote
   );
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUser = async (): Promise<void> => {
+      if (!localStorage.getItem("jwt")) {
+        alert("Please log in.");
+        navigate("/");
+      }
+      if (globalPrices.global === 0 && globalPrices.universal === 0) {
+        alert("Please fill out a quote request.");
+        navigate("/cars");
+      }
+    };
+    getUser();
+  }, []);
 
   const handleToggleChange = async (
     event: React.FormEvent<HTMLInputElement>
-  ) => {
+  ): Promise<void> => {
     event.preventDefault();
     setIsYearly(!isYearly);
   };
@@ -54,7 +70,7 @@ export const Quote = () => {
           />
         </div>
         <div className="quote__comparison">
-          <a>Show me the full comparison table</a>
+          <a href="">Show me the full comparison table</a>
           <img src={iconComparison} alt="Comparison icon" />
         </div>
       </div>

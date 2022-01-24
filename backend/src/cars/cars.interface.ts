@@ -5,4 +5,5 @@ export interface Car extends Document {
   readonly insurancePrice: number;
   readonly universalPercentageOfValue: number;
   readonly minAge: number;
+  readonly minPrice: number;
 }
