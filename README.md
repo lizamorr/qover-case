@@ -1,4 +1,4 @@
-# Qover Case: Build an insurance app
+# [Qover](https://www.qover.com/) Case: Build an insurance app
 
 ## Description
 
