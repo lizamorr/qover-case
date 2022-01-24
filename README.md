@@ -2,7 +2,7 @@
 
 ## Description
 
-Project built with [Nest.js](https://github.com/nestjs/nest),[React](https://reactjs.org/) & [TypeScript](https://www.typescriptlang.org/)
+Project built with [Nest.js](https://github.com/nestjs/nest), [React](https://reactjs.org/), [React Redux](https://react-redux.js.org/), [TypeScript](https://www.typescriptlang.org/), [MongoDB](https://www.mongodb.com/atlas/database)
 
 ## Getting started
 
