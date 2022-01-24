@@ -6,7 +6,7 @@ Project built with [Nest.js](https://github.com/nestjs/nest),[React](https://rea
 
 ## Getting started
 
-This application has a frontend built with React and a backend built with Nest.js (Node.js + TypeScript). The frontend is modeled after the supplied [Zeplin](https://zeplin.io/) project. Since this application is only run in development with insensitive data, I will share the environment variables.
+This application has a frontend built with React & Redux and a backend built with Nest.js (Node.js + TypeScript). The frontend is modeled after the supplied [Zeplin](https://zeplin.io/) project. Since this application is only run in development with insensitive data, I will share the environment variables.
 
 ### Backend
 
