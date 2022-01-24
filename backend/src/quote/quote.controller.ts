@@ -1,9 +1,6 @@
 import {
   Post,
   Controller,
-  Res,
-  Param,
-  HttpStatus,
   NotFoundException,
   Body,
   UseGuards,
@@ -18,14 +15,11 @@ export class QuoteController {
 
   @UseGuards(JwtAuthGuard)
   @Post('/getQuote')
-  async getQuote(
-    @Res() res,
-    @Body() quoteRequest: QuoteRequest,
-  ): Promise<QuoteResponse> {
+  async getQuote(@Body() quoteRequest: QuoteRequest): Promise<QuoteResponse> {
     const quote = await this.quoteService.getQuote(quoteRequest);
     if (!quote) {
       throw new NotFoundException('Cannot calculate a quote');
     }
-    return res.status(HttpStatus.OK).json(quote);
+    return quote;
   }
 }

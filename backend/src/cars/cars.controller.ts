@@ -1,10 +1,8 @@
 import {
   Controller,
   Get,
-  HttpStatus,
   NotFoundException,
   Param,
-  Res,
   UseGuards,
 } from '@nestjs/common';
 import { Car } from './cars.interface';
@@ -18,24 +16,21 @@ export class CarsController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getCars(@Res() res): Promise<Car[]> {
+  async getCars(): Promise<Car[]> {
     const cars = await this.carsService.getCars();
     if (!cars || cars.length === 0) {
       throw new NotFoundException('Cars do not exist');
     }
-    return res.status(HttpStatus.OK).json(cars);
+    return cars;
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async getCar(
-    @Res() res,
-    @Param('id', new ValidateObjectId()) id,
-  ): Promise<Car> {
+  async getCar(@Param('id', new ValidateObjectId()) id): Promise<Car> {
     const car = await this.carsService.getCar(id);
     if (!car) {
       throw new NotFoundException('Car does not exist');
     }
-    return res.status(HttpStatus.OK).json(car);
+    return car;
   }
 }
