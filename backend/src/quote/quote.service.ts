@@ -12,6 +12,7 @@ export class QuoteService {
     const quoteErrors: InvalidQuote[] = [];
 
     const car = await this.carsService.getCar(selectedCarId);
+
     if (price < car.minPrice) {
       quoteErrors.push({
         key: 'price',
