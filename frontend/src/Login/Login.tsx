@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export const Login = () => {
     axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
     axios
       .post("/auth/login", {
-        email,
+        username,
         password,
       })
       .then((res) => {
@@ -27,7 +27,7 @@ export const Login = () => {
         error.response.status === 401
           ? setError(true)
           : alert("Error logging in");
-        setEmail("");
+        setUsername("");
         setPassword("");
       });
   };
@@ -47,8 +47,8 @@ export const Login = () => {
               <input
                 type="text"
                 className="input"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
                 required
               />
             </div>

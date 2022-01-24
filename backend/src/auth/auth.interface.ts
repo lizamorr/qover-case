@@ -1,4 +1,4 @@
 export type ValidatedUser = {
   userId: number;
-  email: string;
+  username: string;
 };
