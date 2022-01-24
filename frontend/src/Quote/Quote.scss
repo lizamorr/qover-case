@@ -1,0 +1,77 @@
+$greyish-brown-5: rgba(72, 72, 72, 0.05);
+
+.quote {
+  min-width: 18rem;
+  margin: 0 auto;
+  background: url(./background-travel.svg), $greyish-brown-5;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 6rem;
+  }
+  &__header {
+    font-family: museo-sans, sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    color: #fff;
+    padding-bottom: 2rem;
+  }
+  &__toggle {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem;
+    align-items: center;
+    &-label {
+      font-size: 13px;
+      letter-spacing: 1.08px;
+      color: #fff;
+    }
+    &-icon {
+      padding: 0 0.5rem;
+    }
+
+    .toggle {
+      cursor: pointer;
+      .react-toggle-track,
+      .react-toggle-track:hover,
+      .react-toggle--checked,
+      .react-toggle--checked:hover {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        height: 30px;
+      }
+      .react-toggle--focus,
+      .react-toggle-thumb {
+        border: none;
+        top: 4px;
+        box-shadow: none;
+      }
+    }
+  }
+  &__card-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+  }
+  &__comparison {
+    display: flex;
+    flex-direction: row;
+    color: #31cfda;
+    padding: 2rem;
+    cursor: pointer;
+    span {
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: underline;
+      padding-right: 12px;
+    }
+  }
+}

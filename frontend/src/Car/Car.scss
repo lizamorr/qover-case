@@ -1,0 +1,137 @@
+$blue-grey: #5b7289;
+$greyish-brown: #484848;
+$greyish-brown-5: rgba(72, 72, 72, 0.05);
+$light-blue: #31cfda;
+$red: #ee3d57;
+
+.car {
+  min-width: 18rem;
+  margin: 0 auto;
+  background-image: url(./bitmap.png),
+    linear-gradient(122deg, #317bda -6%, #33c3c8);
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 4rem;
+  }
+  &__card {
+    text-align: center;
+    max-width: 935px;
+    width: 100%;
+    min-width: 300px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.5);
+    background-color: #fff;
+    width: 75%;
+    .error {
+      color: $red;
+      font-size: 15px;
+      font-weight: 500;
+      display: flex;
+      padding-top: 5px;
+      flex: 1.7;
+      text-align: left;
+    }
+    &-form {
+      padding: 3rem 4rem;
+      font-size: 15px;
+    }
+    &-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      padding-bottom: 1rem;
+      color: $greyish-brown;
+    }
+    &-label {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1;
+      text-align: left;
+      justify-content: center;
+      padding-right: 5px;
+      max-height: 43px;
+    }
+    &-input {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1.7;
+      justify-content: center;
+    }
+    &-price {
+      display: flex;
+      flex-direction: row;
+      .input {
+        margin-right: 1rem;
+      }
+      .euro {
+        align-self: center;
+        &--red {
+          color: $red;
+        }
+      }
+    }
+  }
+  .input,
+  .select {
+    height: 40px;
+    border-radius: 2px;
+    border: solid 1px rgba(72, 72, 72, 0.2);
+    padding-left: 1rem;
+    font-size: 15px;
+  }
+  .input {
+    max-width: 80px;
+    &--invalid {
+      border: solid 1px $red;
+      color: $red;
+    }
+  }
+
+  // Remove the number input arrows
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  .select {
+    max-width: 324px;
+    background-image: url(./icon-dropdown.svg);
+    background-position: right 10px top 50%;
+    position: relative;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+  .price-button {
+    border-radius: 5px;
+    border: solid 1px $light-blue;
+    background-color: $light-blue;
+    width: 163px;
+    height: 50px;
+    padding: 1rem 2rem;
+    font-family: museo-sans, sans-serif !important;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+}
