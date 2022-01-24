@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "./qover-logo.svg";
 import checkCircled from "./check-circled.svg";
 import { useNavigate } from "react-router";
-import axios from "axios";
+import { login } from "./api";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,25 +11,19 @@ export const Login = () => {
   const navigate = useNavigate();
   const authenticateLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.defaults.baseURL = process.env.REACT_APP_NESTJS_BASE_URL;
-    axios
-      .post("/auth/login", {
-        username,
-        password,
-      })
-      .then((res) => {
-        if (res.data) {
-          localStorage.setItem("jwt", res.data.access_token);
-          navigate("/cars");
-        }
-      })
-      .catch((error) => {
-        error.response.status === 401
-          ? setError(true)
-          : alert("Error logging in");
-        setUsername("");
-        setPassword("");
-      });
+    try {
+      const loginStatus = await login(username, password);
+      if (loginStatus?.data) {
+        localStorage.setItem("jwt", loginStatus.data.access_token);
+        navigate("/cars");
+      }
+    } catch (error: any) {
+      error.response?.status === 401
+        ? setError(true)
+        : alert("Error logging in");
+      setUsername("");
+      setPassword("");
+    }
   };
 
   return (
