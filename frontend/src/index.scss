@@ -7,15 +7,15 @@
 @use "./Quote/PlanCard/PlanCard.scss";
 @use "./Background/Background.scss";
 
+html {
+  height: 100%;
+}
 body {
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   font-family: Roboto;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
-  #root {
-    height: 100vh;
-  }
 }

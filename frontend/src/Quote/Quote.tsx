@@ -22,10 +22,10 @@ export const Quote = () => {
         alert("Please log in.");
         navigate("/");
       }
-      if (globalPrices.global === 0 && globalPrices.universal === 0) {
-        alert("Please fill out a quote request.");
-        navigate("/cars");
-      }
+      // if (globalPrices.global === 0 && globalPrices.universal === 0) {
+      //   alert("Please fill out a quote request.");
+      //   navigate("/cars");
+      // }
     };
     getUser();
   }, []);
@@ -70,7 +70,7 @@ export const Quote = () => {
           />
         </div>
         <div className="quote__comparison">
-          <a href="">Show me the full comparison table</a>
+          <span>Show me the full comparison table</span>
           <img src={iconComparison} alt="Comparison icon" />
         </div>
       </div>

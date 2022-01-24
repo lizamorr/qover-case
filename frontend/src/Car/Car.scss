@@ -5,12 +5,15 @@ $light-blue: #31cfda;
 $red: #ee3d57;
 
 .car {
-  height: 100vh;
-  max-width: 120rem;
   min-width: 18rem;
   margin: 0 auto;
   background-image: url(./bitmap.png),
     linear-gradient(122deg, #317bda -6%, #33c3c8);
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
   &__container {
     display: flex;
     flex-direction: column;
