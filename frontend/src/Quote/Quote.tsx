@@ -22,10 +22,10 @@ export const Quote = () => {
         alert("Please log in.");
         navigate("/");
       }
-      // if (globalPrices.global === 0 && globalPrices.universal === 0) {
-      //   alert("Please fill out a quote request.");
-      //   navigate("/cars");
-      // }
+      if (globalPrices.global === 0 && globalPrices.universal === 0) {
+        alert("Please fill out a quote request.");
+        navigate("/cars");
+      }
     };
     getUser();
   }, []);
