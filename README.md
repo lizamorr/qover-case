@@ -1,4 +1,6 @@
 # [Qover](https://www.qover.com/) Case: Build an insurance app
+<img width="999" alt="Screenshot 2024-11-01 at 2 48 49 PM" src="https://github.com/user-attachments/assets/8e0e1433-cae7-4a1e-9faa-01e0b649f00b">
+
 
 ## Description
 
